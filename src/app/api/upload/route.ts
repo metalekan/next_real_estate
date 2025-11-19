@@ -1,23 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary/config';
-import { authenticateRequest } from '@/lib/auth/middleware';
+
+// Define the name of the cookie where the JWT is stored.
+const TOKEN_COOKIE_NAME = 'authToken'; 
+
 
 export async function POST(request: NextRequest) {
   try {
-    // Check authentication
-    // const authResult = await authenticateRequest(request);
-    // if (!authResult.success) {
-    //   return NextResponse.json(
-    //     { success: false, error: 'Unauthorized' },
-    //     { status: 401 }
-    //   );
-    // }
+   const token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
+   
+       if (!token) {
+         return NextResponse.json(
+           { success: false, message: 'Not Authorized' },
+           { status: 401 } // Unauthorized
+         );
+       }
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const folder = formData.get('folder') as string || 'real-estate/properties';
+    const folder = formData.get('folder') as string || 'next-real-estate/properties';
 
     if (!file) {
+        console.log(file);
       return NextResponse.json(
         { success: false, error: 'No file provided' },
         { status: 400 }
@@ -89,12 +93,12 @@ export async function POST(request: NextRequest) {
 // Delete image from Cloudinary
 export async function DELETE(request: NextRequest) {
   try {
-    // Check authentication
-    const authResult = await authenticateRequest(request);
-    if (!authResult.success) {
+    const token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
+
+    if (!token) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
+        { success: false, message: 'No authentication token found' },
+        { status: 401 } // Unauthorized
       );
     }
 
