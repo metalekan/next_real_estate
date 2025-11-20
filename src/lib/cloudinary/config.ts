@@ -4,6 +4,7 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
 });
 
 export default cloudinary;
@@ -35,3 +36,6 @@ export const imageSizes = {
   detail: { width: 800, height: 600 },
   full: { width: 1200, height: 800 },
 };
+
+export const uploader = cloudinary.uploader; 
+export { cloudinary };
