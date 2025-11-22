@@ -44,6 +44,14 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>(
       type: String,
       default: "",
     },
+    passwordResetToken: {
+      type: String,
+      select: false,
+    },
+    passwordResetExpires: {
+      type: Date,
+      select: false,
+    },
   },
   {
     timestamps: true,
@@ -55,6 +63,7 @@ UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   try {
+    if (!this.password) return next();
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
@@ -68,6 +77,7 @@ UserSchema.methods.comparePassword = async function (
   candidatePassword: string
 ): Promise<boolean> {
   try {
+    if (!this.password) return false;
     return await bcrypt.compare(candidatePassword, this.password);
   } catch (error) {
     return false;

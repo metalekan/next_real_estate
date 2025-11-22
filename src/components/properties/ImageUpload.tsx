@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 interface ImageUploadProps {
-  images: string[];
-  onChange: (images: string[]) => void;
+  images: { url: string; publicId: string }[];
+  onChange: (images: { url: string; publicId: string }[]) => void;
   maxImages?: number;
 }
 
@@ -31,11 +31,11 @@ export default function ImageUpload({
     setError('');
     setProgress(0);
 
-    const token = localStorage.getItem('token');
-    const uploadedUrls: string[] = [];
+    const uploadedImages: { url: string; publicId: string }[] = [];
     const totalFiles = files.length;
 
     try {
+      const token = localStorage.getItem('token');
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
@@ -53,19 +53,22 @@ export default function ImageUpload({
 
         const formData = new FormData();
         formData.append('file', file);
-
+        
         const response = await fetch('/api/upload', {
           method: 'POST',
+          body: formData,
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          body: formData,
         });
 
         const result = await response.json();
 
         if (result.success) {
-          uploadedUrls.push(result.data.url);
+          uploadedImages.push({
+            url: result.data.url,
+            publicId: result.data.publicId,
+          });
         } else {
           setError(result.error || `Failed to upload ${file.name}`);
         }
@@ -73,8 +76,8 @@ export default function ImageUpload({
         setProgress(((i + 1) / totalFiles) * 100);
       }
 
-      if (uploadedUrls.length > 0) {
-        onChange([...images, ...uploadedUrls]);
+      if (uploadedImages.length > 0) {
+        onChange([...images, ...uploadedImages]);
       }
     } catch (err) {
       setError('Upload failed. Please try again.');
@@ -214,13 +217,13 @@ export default function ImageUpload({
             Drag to reorder. First image is the main photo.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {images.map((url, index) => (
+            {images.map((image, index) => (
               <div
-                key={url}
+                key={image.publicId}
                 className="relative group aspect-square rounded-lg overflow-hidden border-2 border-gray-200 hover:border-primary-500 transition"
               >
                 <Image
-                  src={url}
+                  src={image.url}
                   alt={`Property image ${index + 1}`}
                   fill
                   className="object-cover"

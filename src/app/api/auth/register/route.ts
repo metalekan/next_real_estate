@@ -51,12 +51,6 @@ export async function POST(request: NextRequest) {
       avatar: user.avatar,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-
-        // 💡 NEW FIELDS FOR PASSWORD RESET
-  passwordResetToken: user.passwordResetToken,
-  passwordResetExpires: user.passwordResetExpires,
-
-
     });
 
     // Return user without password

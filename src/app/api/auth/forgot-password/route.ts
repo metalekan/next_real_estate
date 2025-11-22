@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
         // 4. Save token details to the user record
         user.passwordResetToken = passwordResetToken; // HASHED version
-        user.passwordResetExpires = passwordResetExpires;
+        user.passwordResetExpires = new Date(passwordResetExpires);
         await user.save({ validateBeforeSave: false }); 
 
         // 5. Construct the reset URL and send the email

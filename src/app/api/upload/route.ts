@@ -7,21 +7,29 @@ const TOKEN_COOKIE_NAME = 'authToken';
 
 export async function POST(request: NextRequest) {
   try {
-   const token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
+    let token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
+
+    // Fallback to Authorization header
+    if (!token) {
+      const authHeader = request.headers.get('authorization');
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
    
-       if (!token) {
-         return NextResponse.json(
-           { success: false, message: 'Not Authorized' },
-           { status: 401 } // Unauthorized
-         );
-       }
+    if (!token) {
+      return NextResponse.json(
+        { success: false, message: 'Not Authorized' },
+        { status: 401 } // Unauthorized
+      );
+    }
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const folder = formData.get('folder') as string || 'next-real-estate/properties';
 
     if (!file) {
-        console.log(file);
+        // console.log(file);
       return NextResponse.json(
         { success: false, error: 'No file provided' },
         { status: 400 }

@@ -109,6 +109,7 @@ export const API_ENDPOINTS = {
     LOGIN: '/api/auth/login',
     REGISTER: '/api/auth/register',
     LOGOUT: '/api/auth/logout',
+    FORGOT_PASSWORD: '/api/auth/forgot-password',
   },
   PROPERTIES: {
     BASE: '/api/properties',

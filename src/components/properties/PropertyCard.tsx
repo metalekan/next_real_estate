@@ -2,14 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { IProperty } from '@/types/property';
 import { formatPrice } from '@/lib/utils/formatters';
-import { getOptimizedUrl } from '@/lib/cloudinary/config';
+import { getOptimizedUrl } from '@/lib/cloudinary/url-utils';
 
 interface PropertyCardProps {
   property: IProperty;
 }
 
 export default function PropertyCard({ property }: PropertyCardProps) {
-  const mainImage = property.images[0] || '/images/placeholder.jpg';
+  const mainImage = property.images[0]?.url || '/images/placeholder.jpg';
 
   return (
     <Link href={`/properties/${property._id}`}>

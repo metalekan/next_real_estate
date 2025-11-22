@@ -64,23 +64,19 @@ export async function POST(request: NextRequest) {
       updatedAt: user.updatedAt,
     };
 
-    // 4. Create the Final Response and Set Cookie
-    const response = NextResponse.json(
-      {
-        success: true,
-        data: { user: userResponse }, // Token is NOT in the JSON body anymore
-        message: 'Login successful',
-      },
-      { status: 200 }
-    );
+    const response = NextResponse.json({
+      success: true,
+      data: userResponse,
+    });
 
-    // Set the token as an HTTP-Only Cookie
-    response.cookies.set(TOKEN_COOKIE_NAME, token, {
-      httpOnly: true, // Prevents client-side JS access (XSS protection)
-      secure: process.env.NODE_ENV === 'production', // Use HTTPS only in production
-      sameSite: 'strict', // Strong CSRF protection
-      maxAge: 60 * 60 * 24 * 7, // 1 week duration (adjust as needed)
-      path: '/', // Cookie accessible across the whole site
+    response.cookies.set({
+      name: TOKEN_COOKIE_NAME,
+      value: token,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+      path: '/',
     });
 
     return response;

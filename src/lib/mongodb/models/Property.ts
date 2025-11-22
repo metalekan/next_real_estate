@@ -113,7 +113,7 @@ const PropertySchema = new Schema<IProperty, PropertyModel>(
       type: [{
         url: { type: String, required: true },
         publicId: { type: String, required: true }
-    }],
+      }],
       default: [],
       validate: {
         validator: function (v: string[]) {
@@ -127,7 +127,7 @@ const PropertySchema = new Schema<IProperty, PropertyModel>(
       default: [],
     },
     agentId: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId as any,
       ref: 'User',
       required: [true, 'Agent is required'],
     },
@@ -154,7 +154,7 @@ PropertySchema.index({ status: 1, isActive: 1 });
 PropertySchema.index({ 'location.city': 1, 'location.state': 1 });
 PropertySchema.index({ price: 1 });
 PropertySchema.index({ type: 1 });
-PropertySchema.index({ agent: 1 });
+PropertySchema.index({ agentId: 1 });
 PropertySchema.index({ createdAt: -1 });
 
 // Text index for search functionality

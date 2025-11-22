@@ -8,20 +8,26 @@ export interface AuthenticatedRequest extends NextRequest {
 export async function authenticateRequest(
   request: NextRequest
 ): Promise<{ success: boolean; user?: JWTPayload; error?: string }> {
+  // 1. Try header
   const authHeader = request.headers.get('authorization');
-  const token = extractTokenFromHeader(authHeader || '');
+  let token = extractTokenFromHeader(authHeader || '');
+
+  // 2. Try cookie
+  if (!token) {
+    const cookie = request.cookies.get('authToken');
+    if (cookie) token = cookie.value;
+  }
 
   if (!token) {
     return { success: false, error: 'No token provided' };
   }
 
-  const user = verifyToken(token);
-
-  if (!user) {
+  try {
+    const user = await verifyToken(token);
+    return { success: true, user };
+  } catch (error) {
     return { success: false, error: 'Invalid or expired token' };
   }
-
-  return { success: true, user };
 }
 
 export function requireAuth(handler: Function) {

@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     // Execute query
     const [properties, total] = await Promise.all([
       Property.find(filter)
-        .populate('agent', 'name email phone avatar')
+        .populate('agentId', 'name email phone avatar')
         .sort(sort)
         .skip(skip)
         .limit(limit)
@@ -114,11 +114,11 @@ export const POST = requireRole('agent', 'admin')(async (request: AuthenticatedR
     // Create property with authenticated user as agent
     const property = await Property.create({
       ...validation.data,
-      agent: request.user!.userId,
+      agentId: request.user!.userId,
     });
 
     // Populate agent details
-    await property.populate('agent', 'name email phone avatar');
+    await property.populate('agentId', 'name email phone avatar');
 
     return NextResponse.json(
       {

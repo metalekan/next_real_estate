@@ -12,7 +12,7 @@ export async function GET(
     await connectDB();
 
     const property = await Property.findById(params.id)
-      .populate('agent', 'name email phone avatar')
+      .populate('agentId', 'name email phone avatar')
       .lean();
 
     if (!property) {
@@ -62,7 +62,7 @@ export const PUT = requireAuth(async (
 
     // Check if user is the owner or admin
     if (
-      property.agent.toString() !== request.user!.userId &&
+      property.agentId.toString() !== request.user!.userId &&
       request.user!.role !== 'admin'
     ) {
       return NextResponse.json(
@@ -76,7 +76,7 @@ export const PUT = requireAuth(async (
       params.id,
       { $set: body },
       { new: true, runValidators: true }
-    ).populate('agent', 'name email phone avatar');
+    ).populate('agentId', 'name email phone avatar');
 
     return NextResponse.json(
       {
@@ -115,7 +115,7 @@ export const DELETE = requireAuth(async (
 
     // Check if user is the owner or admin
     if (
-      property.agent.toString() !== request.user!.userId &&
+      property.agentId.toString() !== request.user!.userId &&
       request.user!.role !== 'admin'
     ) {
       return NextResponse.json(

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { getOptimizedUrl } from '@/lib/cloudinary/config';
+import { getOptimizedUrl } from '@/lib/cloudinary/url-utils';
 
 interface PropertyGalleryProps {
   images: string[];

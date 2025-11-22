@@ -59,7 +59,12 @@ export const propertySchema = z.object({
     balcony: z.boolean().optional(),
     furnished: z.boolean().optional(),
   }),
-  images: z.array(z.string()).min(1, 'At least one image is required'),
+  images: z.array(
+    z.object({
+      url: z.string(),
+      publicId: z.string(),
+    })
+  ).min(1, 'At least one image is required'),
   amenities: z.array(z.string()).optional(),
 });
 

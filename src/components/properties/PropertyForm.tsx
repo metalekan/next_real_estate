@@ -37,7 +37,7 @@ interface PropertyFormData {
     balcony: boolean;
     furnished: boolean;
   };
-  images: string[];
+  images: { url: string; publicId: string }[];
   amenities: string[];
 }
 

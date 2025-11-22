@@ -18,12 +18,12 @@ type InquiryModel = Model<IInquiry>;
 const InquirySchema = new Schema<IInquiry, InquiryModel>(
   {
     property: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId as any,
       ref: 'Property',
       required: [true, 'Property reference is required'],
     },
     user: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId as any,
       ref: 'User',
     },
     name: {
