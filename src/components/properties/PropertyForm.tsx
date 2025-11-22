@@ -162,7 +162,6 @@ export default function PropertyForm({
     setIsSubmitting(true);
 
     try {
-      const token = localStorage.getItem('token');
       const url =
         mode === 'create'
           ? '/api/properties'
@@ -173,7 +172,6 @@ export default function PropertyForm({
         method,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -196,7 +194,7 @@ export default function PropertyForm({
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Images Section */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Property Images</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Property Images</h2>
         <ImageUpload
           images={formData.images}
           onChange={(images) => setFormData((prev) => ({ ...prev, images }))}
@@ -209,7 +207,7 @@ export default function PropertyForm({
 
       {/* Basic Info Section */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Basic Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Title */}
           <div className="md:col-span-2">
@@ -221,7 +219,7 @@ export default function PropertyForm({
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors.title ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="e.g., Beautiful 3-Bedroom Family Home"
@@ -241,7 +239,7 @@ export default function PropertyForm({
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors.description ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="Describe the property in detail..."
@@ -260,7 +258,7 @@ export default function PropertyForm({
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             >
               {PROPERTY_TYPES.map((type) => (
                 <option key={type.value} value={type.value}>
@@ -279,7 +277,7 @@ export default function PropertyForm({
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             >
               {PROPERTY_STATUS.map((status) => (
                 <option key={status.value} value={status.value}>
@@ -298,7 +296,7 @@ export default function PropertyForm({
               name="condition"
               value={formData.condition}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             >
               {PROPERTY_CONDITIONS.map((condition) => (
                 <option key={condition.value} value={condition.value}>
@@ -315,14 +313,14 @@ export default function PropertyForm({
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                $
+                £
               </span>
               <input
                 type="number"
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                className={`w-full pl-8 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+                className={`w-full pl-8 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                   errors.price ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="500000"
@@ -337,7 +335,7 @@ export default function PropertyForm({
 
       {/* Location Section */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Location</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Location</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -348,7 +346,7 @@ export default function PropertyForm({
               name="location.address"
               value={formData.location.address}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors['location.address'] ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="123 Main Street"
@@ -369,7 +367,7 @@ export default function PropertyForm({
               name="location.city"
               value={formData.location.city}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors['location.city'] ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="New York"
@@ -385,7 +383,7 @@ export default function PropertyForm({
               name="location.state"
               value={formData.location.state}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors['location.state'] ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="NY"
@@ -401,7 +399,7 @@ export default function PropertyForm({
               name="location.zipCode"
               value={formData.location.zipCode}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700 ${
                 errors['location.zipCode'] ? 'border-red-500' : 'border-gray-300'
               }`}
               placeholder="10001"
@@ -417,7 +415,7 @@ export default function PropertyForm({
               name="location.country"
               value={formData.location.country}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
               placeholder="USA"
             />
           </div>
@@ -426,7 +424,7 @@ export default function PropertyForm({
 
       {/* Features Section */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Features</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Features</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -438,7 +436,7 @@ export default function PropertyForm({
               value={formData.features.bedrooms}
               onChange={handleChange}
               min="0"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
 
@@ -453,7 +451,7 @@ export default function PropertyForm({
               onChange={handleChange}
               min="0"
               step="0.5"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
 
@@ -467,7 +465,7 @@ export default function PropertyForm({
               value={formData.features.squareFeet}
               onChange={handleChange}
               min="0"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
 
@@ -481,7 +479,7 @@ export default function PropertyForm({
               value={formData.features.lotSize}
               onChange={handleChange}
               min="0"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
 
@@ -496,7 +494,7 @@ export default function PropertyForm({
               onChange={handleChange}
               min="1800"
               max={new Date().getFullYear()}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
 
@@ -510,7 +508,7 @@ export default function PropertyForm({
               value={formData.features.parking}
               onChange={handleChange}
               min="0"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-700"
             />
           </div>
         </div>
@@ -542,7 +540,7 @@ export default function PropertyForm({
 
       {/* Amenities Section */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold mb-4">Amenities</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Amenities</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {COMMON_AMENITIES.map((amenity) => (
             <label key={amenity} className="flex items-center">

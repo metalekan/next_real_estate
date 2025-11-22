@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import PropertyCard from '@/components/properties/PropertyCard';
 import { IProperty } from '@/types/property';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import {
   PROPERTY_TYPES,
   PROPERTY_STATUS,
@@ -26,7 +28,7 @@ export default function PropertiesPage() {
     pages: 0,
   });
 
-  console.log(pagination);
+  // console.log(pagination);
 
   // Filters
   const [filters, setFilters] = useState({
@@ -65,7 +67,7 @@ export default function PropertiesPage() {
 
       const response = await fetch(`/api/properties?${params.toString()}`);
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
 
       if (result.success) {
         setProperties(result.data.properties);
@@ -125,7 +127,9 @@ export default function PropertiesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-indigo-900 text-white py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -491,5 +495,7 @@ export default function PropertiesPage() {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

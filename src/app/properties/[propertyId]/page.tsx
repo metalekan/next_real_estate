@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { IProperty } from '@/types/property';
+import FavoriteButton from '@/components/properties/FavoriteButton';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export default function PropertyDetailPage() {
   const params = useParams();
@@ -55,7 +58,7 @@ export default function PropertyDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -79,7 +82,9 @@ export default function PropertyDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Image Gallery */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
@@ -119,6 +124,11 @@ export default function PropertyDetailPage() {
                 {/* Image Counter */}
                 <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
                   {currentImageIndex + 1} / {property.images.length}
+                </div>
+
+                {/* Favorite Button */}
+                <div className="absolute top-4 right-4">
+                  <FavoriteButton propertyId={property._id} size="lg" />
                 </div>
               </>
             ) : (
@@ -216,24 +226,24 @@ export default function PropertyDetailPage() {
                 {property.features.yearBuilt && (
                   <div>
                     <p className="text-sm text-gray-600">Year Built</p>
-                    <p className="font-semibold">{property.features.yearBuilt}</p>
+                    <p className="font-semibold text-gray-900">{property.features.yearBuilt}</p>
                   </div>
                 )}
                 {property.features.lotSize && (
                   <div>
                     <p className="text-sm text-gray-600">Lot Size</p>
-                    <p className="font-semibold">{property.features.lotSize.toLocaleString()} sq ft</p>
+                    <p className="font-semibold text-gray-900">{property.features.lotSize.toLocaleString()} sq ft</p>
                   </div>
                 )}
                 {property.features.parking !== undefined && (
                   <div>
                     <p className="text-sm text-gray-600">Parking Spaces</p>
-                    <p className="font-semibold">{property.features.parking}</p>
+                    <p className="font-semibold text-gray-900">{property.features.parking}</p>
                   </div>
                 )}
                 <div>
                   <p className="text-sm text-gray-600">Condition</p>
-                  <p className="font-semibold capitalize">{property.condition.replace('-', ' ')}</p>
+                  <p className="font-semibold text-gray-900 capitalize">{property.condition.replace('-', ' ')}</p>
                 </div>
               </div>
 
@@ -259,24 +269,24 @@ export default function PropertyDetailPage() {
                   )}
                   {property.features.garden && (
                     <div className="flex items-center text-gray-700">
-                      <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 m r-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      Garden
+                      Garden 
                     </div>
                   )}
                   {property.features.balcony && (
                     <div className="flex items-center text-gray-700">
                       <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd " d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Balcony
-                    </div>
+                    </div> 
                   )}
                   {property.features.furnished && (
                     <div className="flex items-center text-gray-700">
                       <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1  0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Furnished
                     </div>
@@ -345,15 +355,15 @@ export default function PropertyDetailPage() {
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Property ID</span>
-                  <span className="font-medium">{property._id.slice(-8)}</span>
+                  <span className="font-medium text-gray-900">{property._id.slice(-8)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Views</span>
-                  <span className="font-medium">{property.views || 0}</span>
+                  <span className="font-medium text-gray-900">{property.views || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Listed</span>
-                  <span className="font-medium">
+                  <span className="font-medium text-gray-900">
                     {new Date(property.createdAt).toLocaleDateString()}
                   </span>
                 </div>
@@ -363,5 +373,8 @@ export default function PropertyDetailPage() {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
+ 

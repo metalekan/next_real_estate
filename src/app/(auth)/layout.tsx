@@ -78,13 +78,13 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="flex items-center justify-center mmin-h-screen px-4 py-12 border-dotted border">
-        <div className="w-full max-w-screen-xl min-h-screen flex items-center justify-center py-12 px-4 border">
+      <main className="flex items-center justify-center mmin-h-screen px-4 py-12 border-dotted bg-white">
+        <div className="w-full max-w-screen-xl min-h-screen flex items-center justify-center py-12 px-4">
           {children}
         </div>
       </main>
 
-            <footer className="bg-gray-900 text-white">
+      <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}

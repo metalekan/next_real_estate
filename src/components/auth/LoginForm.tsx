@@ -84,6 +84,7 @@ export default function LoginForm() {
     try {
       // API request to the LOGIN endpoint
       const response = await axios.post(API_ENDPOINTS.AUTH.LOGIN, formData);
+      console.log(response.data.data);
 
       if (response.data.success) {
         // --- NOTE ON COOKIE AUTH ---
@@ -92,10 +93,10 @@ export default function LoginForm() {
         // We only store the user object returned in the JSON body.
         
         // Store user data returned in the JSON body
-        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+        localStorage.setItem('user', JSON.stringify(response.data.data));
 
         // Redirect based on role
-        if (response.data.data.user.role === 'agent') {
+        if (response.data.data.role === 'agent') {
           router.push('/dashboard');
         } else {
           router.push('/properties');
