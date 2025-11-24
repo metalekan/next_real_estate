@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import MostViewedProperties from '@/components/properties/MostViewedProperties';
 
 export default function Home() {
   return (
@@ -74,6 +75,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Most Viewed Properties Section */}
+      <MostViewedProperties />
 
       <Footer />
     </div>

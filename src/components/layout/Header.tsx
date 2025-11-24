@@ -77,14 +77,25 @@ export default function Header() {
                   Favorites
                 </Link>
                 {(user?.role === 'agent' || user?.role === 'admin') && (
-                  <Link
-                    href="/my-properties/new"
-                    className={`${
-                      isActive('/my-properties/new') ? 'text-primary-600' : 'text-gray-700'
-                    } hover:text-primary-600 font-medium transition`}
-                  >
-                    Add Property
-                  </Link>
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className={`flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 font-semibold transition-all shadow-md transform hover:-translate-y-0.5`}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                      </svg>
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/my-properties/new"
+                      className={`${
+                        isActive('/my-properties/new') ? 'text-primary-600' : 'text-gray-700'
+                      } hover:text-primary-600 font-medium transition`}
+                    >
+                      Add Property
+                    </Link>
+                  </>
                 )}
               </>
             )}
@@ -171,15 +182,27 @@ export default function Header() {
                     Favorites
                   </Link>
                   {(user?.role === 'agent' || user?.role === 'admin') && (
-                    <Link
-                      href="/my-properties/new"
-                      className={`${
-                        isActive('/my-properties/new') ? 'text-primary-600' : 'text-gray-700'
-                      } hover:text-primary-600 font-medium`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Add Property
-                    </Link>
+                    <>
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 font-semibold transition-all shadow-md"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
+                        </svg>
+                        Dashboard
+                      </Link>
+                      <Link
+                        href="/my-properties/new"
+                        className={`${
+                          isActive('/my-properties/new') ? 'text-primary-600' : 'text-gray-700'
+                        } hover:text-primary-600 font-medium`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Add Property
+                      </Link>
+                    </>
                   )}
                   <button
                     onClick={() => {

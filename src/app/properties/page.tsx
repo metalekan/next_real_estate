@@ -161,7 +161,7 @@ export default function PropertiesPage() {
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && applyFilters()}
-                  className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-sm group-hover:border-indigo-300"
+                  className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition shadow-sm group-hover:border-indigo-300 text-gray-600"
                 />
                 <svg
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-hover:text-indigo-500 transition"
@@ -184,7 +184,7 @@ export default function PropertiesPage() {
               <select
                 value={filters.status}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
-                className="px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm cursor-pointer hover:border-indigo-300 transition"
+                className="px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm cursor-pointer hover:border-indigo-300 transition text-gray-600"
               >
                 <option value="">All Status</option>
                 {PROPERTY_STATUS.map((status) => (
@@ -197,7 +197,7 @@ export default function PropertiesPage() {
               <select
                 value={filters.type}
                 onChange={(e) => handleFilterChange('type', e.target.value)}
-                className="px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm cursor-pointer hover:border-indigo-300 transition"
+                className="px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm cursor-pointer hover:border-indigo-300 transition text-gray-600"
               >
                 <option value="">All Types</option>
                 {PROPERTY_TYPES.map((type) => (
@@ -254,7 +254,7 @@ export default function PropertiesPage() {
                       placeholder="0"
                       value={filters.minPrice}
                       onChange={(e) => handleFilterChange('minPrice', e.target.value)}
-                      className="w-full pl-7 pr-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full pl-7 pr-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                     />
                   </div>
                 </div>
@@ -268,7 +268,7 @@ export default function PropertiesPage() {
                       placeholder="Any"
                       value={filters.maxPrice}
                       onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
-                      className="w-full pl-7 pr-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full pl-7 pr-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                     />
                   </div>
                 </div>
@@ -279,7 +279,7 @@ export default function PropertiesPage() {
                   <select
                     value={filters.bedrooms}
                     onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                   >
                     <option value="">Any</option>
                     {BEDROOM_OPTIONS.map((opt) => (
@@ -296,7 +296,7 @@ export default function PropertiesPage() {
                   <select
                     value={filters.bathrooms}
                     onChange={(e) => handleFilterChange('bathrooms', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                   >
                     <option value="">Any</option>
                     {BATHROOM_OPTIONS.map((opt) => (
@@ -315,7 +315,7 @@ export default function PropertiesPage() {
                     placeholder="Any city"
                     value={filters.city}
                     onChange={(e) => handleFilterChange('city', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                   />
                 </div>
 
@@ -325,7 +325,7 @@ export default function PropertiesPage() {
                   <select
                     value={filters.sort}
                     onChange={(e) => handleFilterChange('sort', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-gray-600"
                   >
                     {SORT_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
