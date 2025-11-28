@@ -13,7 +13,7 @@ export async function PATCH(
     await connectDB();
 
     // Verify authentication
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -91,7 +91,7 @@ export async function GET(
     await connectDB();
 
     // Verify authentication
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -146,7 +146,7 @@ export async function DELETE(
     await connectDB();
 
     // Verify authentication
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },

@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     // Get user from token if authenticated (optional)
     let userId = null;
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (token) {
       try {
         const decoded = await verifyToken(token);
