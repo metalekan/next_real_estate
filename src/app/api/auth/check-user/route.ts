@@ -4,9 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth/session'; // Assumed utility for JWT verification
 import { connectDB, User } from '@/lib/mongodb/db';
 
-// Define the name of the cookie where the JWT is stored.
-const TOKEN_COOKIE_NAME = 'authToken'; 
-
 /**
  * Checks for a valid authentication token in cookies and returns the user data.
  * @method GET
@@ -15,7 +12,7 @@ const TOKEN_COOKIE_NAME = 'authToken';
 export async function GET(request: NextRequest) {
   try {
     // 1. Retrieve the token from the secure cookie
-    const token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
+    const token = request.cookies.get('authToken')?.value;
 
     if (!token) {
       return NextResponse.json(
