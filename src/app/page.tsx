@@ -34,7 +34,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section with Carousel */}
-      <section className="relative h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
+      <section className="relative hh-[600px] md:hh-[700px] py-20 flex items-center justify-center overflow-hidden">
         {/* Background Images Carousel */}
         {heroImages.map((image, index) => (
           <div
