@@ -117,7 +117,7 @@ export async function GET(
     // Check authorization
     const canView =
       decoded.role === 'admin' ||
-      (inquiry.user && inquiry.user._id.toString() === decoded.userId) ||
+      // (inquiry.user && inquiry.user._id.toString() === decoded.userId) ||
       (inquiry.property as any).agentId.toString() === decoded.userId;
 
     if (!canView) {
