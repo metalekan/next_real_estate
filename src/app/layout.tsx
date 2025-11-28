@@ -6,7 +6,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Real Estate App - Find Your Dream Home',
+  title: 'Horizon Homes - Find Your Dream Home',
   description: 'Browse and discover amazing properties for sale and rent',
 };
 

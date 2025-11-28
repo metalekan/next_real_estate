@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb/db';
+import {connectDB} from '@/lib/mongodb/db';
 import Inquiry from '@/lib/mongodb/models/Inquiry';
 import Property from '@/lib/mongodb/models/Property';
 import { verifyToken } from '@/lib/auth/session';
@@ -21,7 +21,7 @@ export async function PATCH(
       );
     }
 
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     const { id } = params;
     const body = await request.json();
     const { status } = body;
@@ -99,7 +99,7 @@ export async function GET(
       );
     }
 
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     const { id } = params;
 
     // Find inquiry
@@ -154,7 +154,7 @@ export async function DELETE(
       );
     }
 
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     const { id } = params;
 
     // Find inquiry
