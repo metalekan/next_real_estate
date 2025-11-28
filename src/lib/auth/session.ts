@@ -21,18 +21,7 @@ export function generateToken(user: IUserResponse): string {
   });
 }
 
-// export function verifyToken(token: string): JWTPayload | null {
-//   try {
-//     const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
-//     return decoded;
-//   } catch (error) {
-//     console.error('Token verification failed:', error);
-//     return null;
-//   }
-// }
-
-export const verifyToken = (token: string): Promise<any> => {
-  // console.log(JWT_SECRET);
+export const verifyToken = (token: string): Promise<JWTPayload> => {
     return new Promise((resolve, reject) => {
         if (!JWT_SECRET) {
             return reject(new Error("JWT_SECRET is not defined."));
@@ -41,9 +30,14 @@ export const verifyToken = (token: string): Promise<any> => {
         // jwt.verify automatically checks the signature and expiration time
         jwt.verify(token, JWT_SECRET, (err, decoded) => {
             if (err) {
-                return reject(err); // This throws the error if the token is invalid or expired
+                console.error('Token verification error:', err);
+                return reject(err);
             }
-            resolve(decoded);
+            
+            // Ensure decoded token matches JWTPayload structure
+            const payload = decoded as JWTPayload;
+            // console.log('Decoded token payload:', payload);
+            resolve(payload);
         });
     });
 };
@@ -54,19 +48,3 @@ export function extractTokenFromHeader(authHeader?: string): string | null {
   }
   return authHeader.substring(7);
 }
-
-// export const verifyToken = (token: string): Promise<any> => {
-//     return new Promise((resolve, reject) => {
-//         if (!JWT_SECRET) {
-//             return reject(new Error("JWT_SECRET is not defined."));
-//         }
-        
-//         // jwt.verify automatically checks the signature and expiration time
-//         jwt.verify(token, JWT_SECRET, (err, decoded) => {
-//             if (err) {
-//                 return reject(err); // This throws the error if the token is invalid or expired
-//             }
-//             resolve(decoded);
-//         });
-//     });
-// };

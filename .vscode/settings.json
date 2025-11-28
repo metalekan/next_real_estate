@@ -1,0 +1,17 @@
+{
+  "mdb.connectionSaving.hideOptionToChooseWhereToSaveNewConnections": false,
+  "mdb.confirmRunAll": true,
+  "mdb.defaultLimit": 10,
+  "mdb.showMongoDBHelpExplorer": true,
+  "mdb.showMongoDBPlaygrounds": true,
+  "mdb.connections": [
+    {
+      "id": "local-mongodb",
+      "name": "Local MongoDB",
+      "connectionString": "mongodb://localhost:27017",
+      "connectionOptions": {
+        "directConnection": true
+      }
+    }
+  ]
+}

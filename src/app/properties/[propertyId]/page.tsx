@@ -1,26 +1,68 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { IProperty } from '@/types/property';
-import FavoriteButton from '@/components/properties/FavoriteButton';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import FavoriteButton from '@/components/properties/FavoriteButton';
+import InquiryForm from '@/components/properties/InquiryForm';
 
-export default function PropertyDetailPage() {
-  const params = useParams();
+interface PropertyImage {
+  url: string;
+  publicId: string;
+}
+
+interface Property {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  status: string;
+  type: string;
+  location: {
+    address: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
+  features: {
+    bedrooms: number;
+    bathrooms: number;
+    squareFeet: number;
+    yearBuilt?: number;
+    lotSize?: number;
+    parking?: number;
+    garage?: boolean;
+    pool?: boolean;
+    garden?: boolean;
+    balcony?: boolean;
+    furnished?: boolean;
+  };
+  amenities?: string[];
+  images: PropertyImage[];
+  condition: string;
+  views?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export default function PropertyDetailPage({ params }: { params: { propertyId: string } }) {
   const router = useRouter();
-  const propertyId = params.propertyId as string;
-
-  const [property, setProperty] = useState<IProperty | null>(null);
+  const { propertyId } = params;
+  const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showContactForm, setShowContactForm] = useState(false);
 
   useEffect(() => {
-    fetchProperty();
+    if (propertyId) {
+      fetchProperty();
+    }
   }, [propertyId]);
 
   const fetchProperty = async () => {
@@ -269,24 +311,24 @@ export default function PropertyDetailPage() {
                   )}
                   {property.features.garden && (
                     <div className="flex items-center text-gray-700">
-                      <svg className="w-5 h-5 m r-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      Garden 
+                      Garden
                     </div>
                   )}
                   {property.features.balcony && (
                     <div className="flex items-center text-gray-700">
                       <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd " d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Balcony
-                    </div> 
+                    </div>
                   )}
                   {property.features.furnished && (
                     <div className="flex items-center text-gray-700">
                       <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1  0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Furnished
                     </div>
@@ -302,57 +344,11 @@ export default function PropertyDetailPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Card */}
+            {/* Additional Info */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Contact Agent</h2>
-              <button
-                onClick={() => setShowContactForm(!showContactForm)}
-                className="w-full bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700 font-semibold"
-              >
-                Request Information
-              </button>
-              
-              {showContactForm && (
-                <form className="mt-4 space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Your Phone"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                  <textarea
-                    placeholder="Message"
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    defaultValue={`I'm interested in ${property.title}`}
-                  />
-                  <button
-                    type="submit"
-                    className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800"
-                  >
-                    Send Message
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Property Info */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Property Information</h3>
-              <div className="space-y-3 text-sm">
+              <h3 className="font-semibold text-gray-900 mb-3">Additional Information</h3>
+              <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Property ID</span>
                   <span className="font-medium text-gray-900">{property._id.slice(-8)}</span>
@@ -370,6 +366,16 @@ export default function PropertyDetailPage() {
               </div>
             </div>
           </div>
+
+          {/* Sidebar - Inquiry Form */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8">
+              <InquiryForm 
+                propertyId={property._id} 
+                propertyTitle={property.title}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -377,4 +383,3 @@ export default function PropertyDetailPage() {
     </>
   );
 }
- 

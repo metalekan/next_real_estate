@@ -110,6 +110,7 @@ export const POST = requireRole('agent', 'admin')(async (request: AuthenticatedR
     }
 
     await connectDB();
+    console.log(request.user);
 
     // Create property with authenticated user as agent
     const property = await Property.create({

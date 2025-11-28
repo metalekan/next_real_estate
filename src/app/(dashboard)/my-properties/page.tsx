@@ -94,7 +94,7 @@ export default function MyPropertiesPage() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 min-h-screen bg-gray-100">
         <div className="h-10 bg-gray-200 rounded-lg w-64 animate-pulse" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, i) => (
@@ -113,7 +113,7 @@ export default function MyPropertiesPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 p-4 bg-gray-100 min-h-screen">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

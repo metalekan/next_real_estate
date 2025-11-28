@@ -67,10 +67,10 @@ export default function DashboardPage() {
         setLoading(false);
       }
     };
-
+    
     fetchDashboardData();
   }, []);
-
+  
   const statCards = [
     {
       title: 'Total Properties',
@@ -137,7 +137,7 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="space-y-8 animate-fade-in">
+      <div className="space-y-8 animate-fade-in bg-gray-100 min-h-screen">
         <div className="h-10 bg-gray-200 rounded-lg w-96 animate-pulse" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[...Array(4)].map((_, i) => (
@@ -153,7 +153,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8 p-4">
+    <div className="space-y-8 p-4 bg-gray-100 min-h-screen">
       {/* Welcome Header with Gradient */}
       <div className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 rounded-2xl shadow-xl">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />

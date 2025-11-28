@@ -10,7 +10,9 @@ export async function authenticateRequest(
 ): Promise<{ success: boolean; user?: JWTPayload; error?: string }> {
   // 1. Try header
   const authHeader = request.headers.get('authorization');
+      // const cookie = request.cookies.get('authToken');
   let token = extractTokenFromHeader(authHeader || '');
+  // console.log('Token from header:', token);
 
   // 2. Try cookie
   if (!token) {
@@ -53,14 +55,22 @@ export function requireRole(...roles: string[]) {
     return async (request: NextRequest, context?: any) => {
       const authResult = await authenticateRequest(request);
 
+      console.log('requireRole - Auth result:', authResult);
+      console.log('requireRole - Required roles:', roles);
+
       if (!authResult.success) {
+        console.error('requireRole - Authentication failed:', authResult.error);
         return NextResponse.json(
           { success: false, error: 'Unauthorized' },
           { status: 401 }
         );
       }
 
+      console.log('requireRole - User role:', authResult.user!.role);
+      console.log('requireRole - Role check:', roles.includes(authResult.user!.role));
+
       if (!roles.includes(authResult.user!.role)) {
+        console.error('requireRole - Insufficient permissions. User role:', authResult.user!.role, 'Required:', roles);
         return NextResponse.json(
           { success: false, error: 'Forbidden: Insufficient permissions' },
           { status: 403 }
