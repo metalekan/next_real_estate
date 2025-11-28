@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb/db';
+import { connectDB } from '@/lib/mongodb/db';
 import Inquiry from '@/lib/mongodb/models/Inquiry';
 import Property from '@/lib/mongodb/models/Property';
 import { verifyToken } from '@/lib/auth/session';
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     await connectDB();
 
     // Verify authentication
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
 
     // Only agents and admins can view statistics
     if (decoded.role === 'user') {
