@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const token = request.cookies.get('token')?.value;
     if (token) {
       try {
-        const decoded = verifyToken(token);
+        const decoded = await verifyToken(token);
         userId = decoded.userId;
       } catch (error) {
         // User not authenticated, continue without userId
@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const decoded = verifyToken(token);
+    const decoded = await verifyToken(token);
     const { searchParams } = new URL(request.url);
     const propertyId = searchParams.get('propertyId');
     const status = searchParams.get('status');
