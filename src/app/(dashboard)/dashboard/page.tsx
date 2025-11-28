@@ -40,7 +40,10 @@ export default function DashboardPage() {
 
         // Fetch inquiries
         const inquiriesRes = await fetch('/api/inquiries');
-        const inquiriesData = await inquiriesRes.json();
+        const inquiries = await inquiriesRes.json();
+        const inquiriesData = inquiries.inquiries;
+
+        console.log(inquiriesData);
 
         if (propertiesData.success) {
           const properties = propertiesData.data || [];
@@ -56,9 +59,9 @@ export default function DashboardPage() {
             totalProperties: properties.length,
             activeListings,
             totalViews,
-            totalInquiries: inquiriesData.data?.length || 0,
+            totalInquiries: inquiriesData?.length || 0,
             recentProperties: properties.slice(0, 5),
-            recentInquiries: inquiriesData.data?.slice(0, 5) || [],
+            recentInquiries: inquiriesData?.slice(0, 5) || [],
           });
         }
       } catch (error) {

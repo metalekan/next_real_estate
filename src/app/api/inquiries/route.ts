@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
     await connectDB();
 
     // Verify authentication
-    const token = request.cookies.get('token')?.value;
+    const token = request.cookies.get('authToken')?.value;
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -134,6 +134,8 @@ export async function GET(request: NextRequest) {
       .populate('property', 'title location price images')
       .populate('user', 'name email')
       .sort({ createdAt: -1 });
+
+    // console.log(inquiries);
 
     return NextResponse.json({
       inquiries,
