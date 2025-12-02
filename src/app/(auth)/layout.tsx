@@ -30,9 +30,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
                     />
                   </svg>
                 </div>
-                <span className="font-bold text-xl text-gray-900">
-                  RealEstate
-                </span>
+               <span className="text-sm md:text-xl font-bold text-gray-900">Horizon Homes</span>
               </Link>
             </div>
 
@@ -68,7 +66,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
               </Link>
               <Link
                 href="/register"
-                className="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition"
+                className="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition text-sm"
               >
                 Get Started
               </Link>
@@ -105,7 +103,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
                     />
                   </svg>
                 </div>
-                <span className="font-bold text-xl">RealEstate</span>
+                <span className="text-lg md:text-xl font-bold text-white">Horizon Homes</span>
               </div>
               <p className="text-gray-400 text-sm">
                 Find your dream home with our extensive collection of properties.
